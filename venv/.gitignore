@@ -1,0 +1,39 @@
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env
+
+# Editor-specific files
+.idea/
+.vscode/
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.out
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Python-specific files
+*.pyc
+*.pyo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+
+# Dependency directories
+node_modules/
