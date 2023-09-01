@@ -18,5 +18,26 @@ class PlayerList:
             self.tail = new_node
             new_node.prev = None
 
+    def push_end(self, new):
+        # add to tail
+        new_node = PlayerNode(new)
+        new_node.prev = self.tail
+
+        # is list empty
+        if new_node.prev == None:
+            self.head = new_node
+            self.tail = new_node
+            new_node.next = None # first previous has to be null now
+        else:  # If list is not empty, change values accordingly
+            self.tail.next = new_node
+            new_node.next = None
+            self.tail = new_node  # Make new node the new end tail
+
     def is_empty(self):
         return self.head is None and self.tail is None
+
+    def peek_back(self):  # returns last element
+        if self.tail == None:  # checks whether list is empty or not
+            print("List is empty")
+        else:
+            return self.tail.player

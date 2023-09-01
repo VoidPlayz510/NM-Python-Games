@@ -52,5 +52,22 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertTrue(player_list.is_empty())
 
+    def get_last_player_name(self, player_list):
+        return player_list.players[-1].name
+
+    def test_push_tail(self):
+        player_list = PlayerList()
+        player1 = Player(1, name='Player 1')
+        player2 = Player(2, name='Player 2')
+        player3 = Player(3, name='Player 3')
+
+        player_list.push_front(player2)
+        player_list.push_end(player3)
+        player_list.push_end(player1)
+
+        last_player = player_list.peek_back()
+
+        self.assertEqual(last_player.name, 'Player 1', 'The player\'s do not match')
+
 if __name__ == '__main__':
     unittest.main()
