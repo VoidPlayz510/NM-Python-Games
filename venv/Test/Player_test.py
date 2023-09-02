@@ -19,5 +19,22 @@ class TestPlayerValues(unittest.TestCase):
         player = Player(uid=132, name='Alice')
         self.assertEqual(player.name, 'Alice', 'The names do not match.')
 
+    def test_passwords_first(self):
+        player = Player(1, name="Bob")
+
+        # set password
+        player.add_password("MyPassword")
+        self.assertTrue(player.verify_password("MyPassword"))
+        self.assertFalse(player.verify_password("NotMyPassword"))
+
+
+    def test_passwords_second(self):
+        player = Player(2, name="Bandy")
+
+        # set password
+        player.add_password("MyPasswordTwo")
+        self.assertTrue(player.verify_password("MyPasswordTwo"))
+        self.assertFalse(player.verify_password("NotMyPasswordTwo"))
+
 if __name__ == '__main__':
     unittest.main()
