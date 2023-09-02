@@ -17,19 +17,19 @@ class Player:
     def __str__(self):
         return f'GUID is {self.uid}, players\'s name is {self.name}'
 
-    def add_password(self, pwd):
+    def add_password(self, password):
         # Initialize the PasswordHasher
         ph = PasswordHasher()
 
         # Hash the password
-        self.__password_hash = ph.hash(pwd)
-    def verify_password(self, pwd):
+        self.__password_hash = ph.hash(password)
+    def verify_password(self, password):
         # Initialize the PasswordHasher
         ph = PasswordHasher()
 
         # Test the provided password against the stored hash/password
         try:
-            return ph.verify(self.__password_hash, pwd)
+            return ph.verify(self.__password_hash, password)
         except Exception: # catch an error
             return False
 
