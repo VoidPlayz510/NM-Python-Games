@@ -69,5 +69,62 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertEqual(last_player.name, 'Player 1', 'The player\'s do not match')
 
+    def test_pop_front(self):
+        # Create a PlayerList and add some players
+        player_list = PlayerList()
+        player1 = Player(1, name='Player 1')
+        player2 = Player(2, name='Player 2')
+        player_list.push_front(player1)
+        player_list.push_front(player2) # last item pushed up
+
+        # Check if the front player is the one expected before popping
+        front_player_before = player_list.peek_front()
+        self.assertEqual(front_player_before, player2)  # Assert that player2 is the front player
+
+        # Pop the front player
+        popped_player = player_list.pop_front() # player2 is now gone
+
+        # Check if the popped player is the one we expected (player2)
+        self.assertEqual(popped_player, player2)
+
+        # Check if the front player is now the one expected (player1)
+        front_player_after = player_list.peek_front()
+        self.assertEqual(front_player_after, player1)
+
+
+    def test_pop_tail(self):
+        # Create a PlayerList and add some players
+        player_list = PlayerList()
+        player1 = Player(1, name='Player 1')
+        player2 = Player(2, name='Player 2')
+        player_list.push_front(player1)
+        player_list.push_front(player2)
+
+        # Check if the front player is the one expected before popping
+        back_player_tail = player_list.peek_back()
+        self.assertEqual(back_player_tail, player1)  # Assert that player1 is the back player
+
+        # Pop the back player
+        popped_player = player_list.pop_end() # player1 is now gone
+
+        # Check if the popped player is the one we expected (player1)
+        self.assertEqual(popped_player, player1)
+
+        # Check if the front player is now the one expected (player2)
+        front_player_after = player_list.peek_front()
+        self.assertEqual(front_player_after, player2)
+
+    def test_pop_end_empty_list(self):
+        player_list = PlayerList()
+
+        # Attempt to pop from an empty/null list
+        popped_player = player_list.pop_end()
+
+        # Check if the popped_player is None, an empty list
+        self.assertIsNone(popped_player)
+
+        # Check if the list is still empty (both head and tail should be None)
+        self.assertIsNone(player_list.head)
+        self.assertIsNone(player_list.tail)
 if __name__ == '__main__':
     unittest.main()

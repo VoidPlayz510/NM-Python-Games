@@ -36,8 +36,45 @@ class PlayerList:
     def is_empty(self):
         return self.head is None and self.tail is None
 
+    def peek_front(self):
+        if self.head == None:  # checks whether list is empty or not
+            print("List is empty")
+        else:
+            return self.head.player
+
     def peek_back(self):  # returns last element
         if self.tail == None:  # checks whether list is empty or not
             print("List is empty")
         else:
             return self.tail.player
+
+    def pop_front(self):
+        # Check if the list is empty
+        if self.head is None:
+            print("List is empty")
+            return None
+
+        # Handle the case where there's only one element in the list
+        if self.head == self.tail:
+            removed_player = self.head.player
+            self.head = None
+            self.tail = None
+            return removed_player
+        else:
+            temp = self.head
+            temp.next.prev = None
+            self.head = temp.next
+            temp.next = None
+            return temp.player
+
+    def pop_end(self):
+        # check if list is empty
+        if self.tail == None:
+            print("List is empty")
+        else:
+            temp = self.tail
+            temp.prev.next = None  # next value for old tail
+            self.tail = temp.prev  # make the tail previous value the new tail
+            temp.prev = None  # removes previous value of new tail
+            return temp.player
+
