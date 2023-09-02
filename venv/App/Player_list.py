@@ -102,4 +102,14 @@ class PlayerList:
         else:
             print(f"Player UID {target_uid} not found in the list")
 
-
+    def display_list(self, forward=True):
+        if forward:
+            current = self.head  # Start from the head
+            while current:
+                print(f"Player ID: {current.player.uid}, Name: {current.player.name}")
+                current = current.next  # Move to the next node
+        else:
+            current = self.tail  # Start from the tail for reverse traversal
+            while current:
+                print(f"Player ID: {current.player.uid}, Name: {current.player.name}")
+                current = current.prev  # Move to the previous node

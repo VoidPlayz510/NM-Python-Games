@@ -144,7 +144,75 @@ class TestPlayerList(unittest.TestCase):
 
         # Asset that the head is (player1's key)
         self.assertEqual(player_list.head._player.uid, 1)
-        self.assertEqual(player_list.tail._player.uid, 3)
+        self.assertEqual(player_list.tail._player.uid, 3)\
+
+    def test_forward_display(self):
+        # Create a predefined list
+        predefined_list = PlayerList()
+        player1 = Player(1, name="Player 1")
+        player2 = Player(2, name="Player 2")
+        player3 = Player(3, name="Player 3")
+        predefined_list.push_front(player1)
+        predefined_list.push_front(player2)
+        predefined_list.push_front(player3)
+
+        # Redirect standard output to a StringIO obj
+        import io
+        import sys
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        # Display the list as forward
+        predefined_list.display_list(forward=True)
+
+        sys.stdout = sys.__stdout__
+
+        # Extract and asset the printed values/players
+        printed_output = captured_output.getvalue().strip().split('\n')
+        expected_output = [
+            "Player ID: 3, Name: Player 3",
+            "Player ID: 2, Name: Player 2",
+            "Player ID: 1, Name: Player 1",
+        ]
+        self.assertEqual(printed_output, expected_output)
+
+        # Print output for human visibility
+        print("\nLList Output:")
+        print("\n".join(printed_output))
+
+    def test_backwards_display(self):
+        # Create a predefined list
+        predefined_list = PlayerList()
+        player1 = Player(1, name="Player 1")
+        player2 = Player(2, name="Player 2")
+        player3 = Player(3, name="Player 3")
+        predefined_list.push_front(player1)
+        predefined_list.push_front(player2)
+        predefined_list.push_front(player3)
+
+        # Redirect standard output to a StringIO obj
+        import io
+        import sys
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        # Display the list as forward
+        predefined_list.display_list(forward=False)
+
+        sys.stdout = sys.__stdout__
+
+        # Extract and asset the printed values/players
+        printed_output = captured_output.getvalue().strip().split('\n')
+        expected_output = [
+            "Player ID: 1, Name: Player 1",
+            "Player ID: 2, Name: Player 2",
+            "Player ID: 3, Name: Player 3",
+        ]
+        self.assertEqual(printed_output, expected_output)
+
+        # Print output for human visibility
+        print("\nLList Output:")
+        print("\n".join(printed_output))
 
 if __name__ == '__main__':
     unittest.main()
