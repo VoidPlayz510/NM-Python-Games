@@ -14,7 +14,6 @@ class TestPlayerList(unittest.TestCase):
         player_list.push_front(player1)
         player_list.push_front(player2)
 
-
         # Pushing player 1 and then 2 should make player 1 the end time and player 2
         # the new top item
         self.assertEqual(player_list.head.player, player2)
@@ -126,5 +125,26 @@ class TestPlayerList(unittest.TestCase):
         # Check if the list is still empty (both head and tail should be None)
         self.assertIsNone(player_list.head)
         self.assertIsNone(player_list.tail)
+
+    def test_pop_key(self):
+        player_list = PlayerList()
+
+        # Create player to be removed
+
+        player1 = Player(1, name="Player 1")
+        player2 = Player(2, name="Player 2")
+        player3 = Player(3, name="Player 3")
+
+        player_list.push_front(player1)
+        player_list.push_front(player2)
+        player_list.push_end(player3)
+
+        # remove player with key of 2
+        player_list.pop_key(2)
+
+        # Asset that the head is (player1's key)
+        self.assertEqual(player_list.head._player.uid, 1)
+        self.assertEqual(player_list.tail._player.uid, 3)
+
 if __name__ == '__main__':
     unittest.main()

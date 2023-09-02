@@ -78,3 +78,28 @@ class PlayerList:
             temp.prev = None  # removes previous value of new tail
             return temp.player
 
+    def pop_key(self, target_uid):
+        if self.head is None:
+            print("List is empty")
+            return
+
+        current = self.head
+        prev = None
+
+        # Iterate through the list
+        while current is not None and current.player.uid != target_uid:
+            prev = current
+            current = current.next
+
+        # If the node with the target UID is found, remove it
+        if current is not None:
+            if prev is not None:
+                prev.next = current._next
+            else:
+                self.head = current._next
+            if current == self.tail:
+                self.tail = prev
+        else:
+            print(f"Player UID {target_uid} not found in the list")
+
+
