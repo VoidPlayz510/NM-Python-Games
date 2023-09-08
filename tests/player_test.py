@@ -1,5 +1,5 @@
 import unittest
-from src.app.player import Player
+from app.player import Player
 
 
 class TestPlayerValues(unittest.TestCase):
@@ -40,6 +40,52 @@ class TestPlayerValues(unittest.TestCase):
         player.add_password("MyPasswordTwo")
         self.assertTrue(player.verify_password("MyPasswordTwo"))
         self.assertFalse(player.verify_password("NotMyPasswordTwo"))
+
+    def test_player_operators(self):
+        """
+        Testing operators such as:
+        ==
+        >=
+        <=
+        <
+        >
+        """
+        player1 = Player(1, "Alice")
+        player1.score = 100
+
+        player2 = Player(2, "Bob")
+        player2.score = 150
+
+        self.assertTrue(player1 < player2)
+        self.assertFalse(player1 > player2)
+        self.assertTrue(player1 <= player2)
+        self.assertTrue(player2 > player1)
+        self.assertTrue(player2 >= player1)
+        self.assertTrue(player1 != player2)
+
+    def test_sort_score(self):
+        Player.clear_list()
+
+        player1 = Player(1, "Alice")
+        player1.score = 23
+
+        player2 = Player(2, "Bob")
+        player2.score = 150
+
+        player3 = Player(3, "John")
+        player3.score = 53
+
+        player3 = Player(4, "Mary")
+        player3.score = 173
+
+        player4 = Player(5, "Park")
+        player4.score = 102
+
+        player_list = Player.sort_list(Player._player_list)
+        test_list = [173, 150, 102, 53, 23]
+
+        self.assertEqual(player_list, test_list, 'The list is not the same')
+        print(player_list)
 
 
 if __name__ == '__main__':

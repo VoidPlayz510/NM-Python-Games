@@ -1,6 +1,6 @@
 import unittest
-from src.app.player import Player
-from src.app.player_list import PlayerList
+from app.player import Player
+from app.player_list import PlayerList
 
 
 def get_last_player_name(player_list):

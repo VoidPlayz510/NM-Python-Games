@@ -1,3 +1,5 @@
+from app.player_node import PlayerNode
+
 
 class PlayerList:
     """
