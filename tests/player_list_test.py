@@ -1,16 +1,7 @@
+import sys
 import unittest
 from app.player import Player
 from app.player_list import PlayerList
-
-
-def get_last_player_name(player_list):
-    """
-    Get the name of the last player in the player list.
-
-    :param player_list: The PlayerList object.
-    :return: The name of the last player.
-    """
-    return player_list.players[-1].name
 
 
 class TestPlayerList(unittest.TestCase):
@@ -18,9 +9,9 @@ class TestPlayerList(unittest.TestCase):
     Unit tests for the PlayerList class.
     """
 
-    def test_push_front(self):
+    def test_push_front_single_player(self):
         """
-        Test pushing a player to the front of the list.
+        Test pushing a single player to the front of the list.
         """
         player_list = PlayerList()
         player1 = Player(1, name='Player 1')
@@ -60,7 +51,7 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(player_list.head.player, player3)
         self.assertEqual(player_list.tail.player, player1)
 
-    def test_empty_list(self):
+    def test_is_empty(self):
         """
         Test checking if the list is empty.
         """
@@ -68,7 +59,7 @@ class TestPlayerList(unittest.TestCase):
 
         self.assertTrue(player_list.is_empty())
 
-    def test_push_tail(self):
+    def test_push_end(self):
         """
         Test pushing a player to the end of the list.
         """
@@ -81,9 +72,7 @@ class TestPlayerList(unittest.TestCase):
         player_list.push_end(player3)
         player_list.push_end(player1)
 
-        last_player = player_list.peek_back()
-
-        self.assertEqual(last_player.name, 'Player 1', 'The player\'s do not match')
+        self.assertEqual(player_list.peek_back().name, 'Player 1', 'The player\'s name does not match')
 
     def test_pop_front(self):
         """
@@ -104,7 +93,7 @@ class TestPlayerList(unittest.TestCase):
         front_player_after = player_list.peek_front()
         self.assertEqual(front_player_after, player1)
 
-    def test_pop_tail(self):
+    def test_pop_end(self):
         """
         Test popping a player from the end of the list.
         """
@@ -153,7 +142,7 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(player_list.head._player.uid, 1)
         self.assertEqual(player_list.tail._player.uid, 3)
 
-    def test_forward_display(self):
+    def test_display_forward_order(self):
         """
         Test displaying the list in forward order.
         """
@@ -165,27 +154,17 @@ class TestPlayerList(unittest.TestCase):
         predefined_list.push_front(player2)
         predefined_list.push_front(player3)
 
-        import io
-        import sys
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
+        player_info_list = predefined_list.display_list(forward=True)
 
-        predefined_list.display_list(forward=True)
-
-        sys.stdout = sys.__stdout__
-
-        printed_output = captured_output.getvalue().strip().split('\n')
         expected_output = [
             "Player ID: 3, Name: Player 3",
             "Player ID: 2, Name: Player 2",
             "Player ID: 1, Name: Player 1",
         ]
-        self.assertEqual(printed_output, expected_output)
 
-        print("\nLList Output:")
-        print("\n".join(printed_output))
+        self.assertEqual(player_info_list, expected_output)
 
-    def test_backwards_display(self):
+    def test_display_reverse_order(self):
         """
         Test displaying the list in reverse order.
         """
@@ -197,25 +176,15 @@ class TestPlayerList(unittest.TestCase):
         predefined_list.push_front(player2)
         predefined_list.push_front(player3)
 
-        import io
-        import sys
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
+        player_info_list = predefined_list.display_list(forward=False)
 
-        predefined_list.display_list(forward=False)
-
-        sys.stdout = sys.__stdout__
-
-        printed_output = captured_output.getvalue().strip().split('\n')
         expected_output = [
             "Player ID: 1, Name: Player 1",
             "Player ID: 2, Name: Player 2",
             "Player ID: 3, Name: Player 3",
         ]
-        self.assertEqual(printed_output, expected_output)
 
-        print("\nLList Output:")
-        print("\n".join(printed_output))
+        self.assertEqual(player_info_list, expected_output)
 
 
 if __name__ == '__main__':

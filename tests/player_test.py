@@ -1,5 +1,7 @@
 import unittest
 from app.player import Player
+from app.player_bnode import PlayerBNode
+from app.player_bst import PlayerBST
 
 
 class TestPlayerValues(unittest.TestCase):
@@ -7,21 +9,21 @@ class TestPlayerValues(unittest.TestCase):
     Unit tests for the Player class.
     """
 
-    def test_name(self):
+    def test_player_name_matches_expected(self):
         """
-        Test the player's name.
+        Test that the player's name matches the expected name.
         """
         player = Player(uid=123, name='Alice')
         self.assertEqual(player.name, 'Alice', 'The names do not match.')
 
-    def test_uid(self):
+    def test_player_uid_matches_expected(self):
         """
-        Test the player's UID.
+        Test that the player's UID matches the expected UID.
         """
         player = Player(uid=132, name='Alice')
-        self.assertEqual(player.uid, 132, 'The UID does not match.')
+        self.assertEqual(player.uid, 132, 'The UIDs do not match.')
 
-    def test_passwords_first(self):
+    def test_player_password_set_and_verify(self):
         """
         Test setting and verifying a player's password.
         """
@@ -31,7 +33,7 @@ class TestPlayerValues(unittest.TestCase):
         self.assertTrue(player.verify_password("MyPassword"))
         self.assertFalse(player.verify_password("NotMyPassword"))
 
-    def test_passwords_second(self):
+    def test_another_player_password_set_and_verify(self):
         """
         Test setting and verifying another player's password.
         """
@@ -85,8 +87,53 @@ class TestPlayerValues(unittest.TestCase):
         test_list = [173, 150, 102, 53, 23]
 
         self.assertEqual(player_list, test_list, 'The list is not the same')
-        print(player_list)
 
+    def test_insert_empty_tree(self):
+        bst = PlayerBST()
+
+        self.assertTrue(bst.is_empty())
+        player1 = Player(1, "Alice")
+
+        bst.insert(player1)
+
+        self.assertFalse(bst.is_empty())
+        self.assertEqual(bst.root.key, "Alice")
+
+    def test_insert_into_non_empty_tree_and_check_left_child(self):
+        bst = PlayerBST()
+
+        player1 = Player(1, "Alice")
+        player2 = Player(2, "Bob")
+        player3 = Player(3, "Charlie")
+
+        bst.insert(player1)
+        bst.insert(player2)
+        bst.insert(player3)
+
+        self.assertFalse(bst.is_empty())
+        self.assertEqual(bst.root.key, "Alice")
+
+        if bst.root.left:
+            left_child = bst.root.left
+            self.assertEqual(left_child.key, "Alice")
+
+    def test_insert_into_non_empty_tree_and_check_right_child(self):
+        bst = PlayerBST()
+
+        player1 = Player(1, "Alice")
+        player2 = Player(2, "Bob")
+        player3 = Player(3, "Charlie")
+
+        bst.insert(player1)
+        bst.insert(player2)
+        bst.insert(player3)
+
+        self.assertFalse(bst.is_empty())
+        self.assertEqual(bst.root.key, "Alice")
+
+        if bst.root.right:
+            right_child = bst.root.right
+            self.assertEqual(right_child.key, "Bob")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,9 +1,6 @@
-from app.player import Player
-
-
 class PlayerBNode:
-
     def __init__(self, player):
+        self.key = player.name
         self._player = player
         self._left = None
         self._right = None

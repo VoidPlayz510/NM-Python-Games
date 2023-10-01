@@ -196,6 +196,7 @@ class Player:
         :return: True if the score is less, False otherwise.
         """
         if isinstance(other, Player):
-            return self.score < other.score
+            if self.score is not None and other.score is not None:
+                return self.score < other.score
         return False
 

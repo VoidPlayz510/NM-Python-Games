@@ -148,14 +148,17 @@ class PlayerList:
         Display the list of players in either forward or reverse order.
 
         :param forward: True to display in forward order, False to display in reverse order.
+        :return: A list of strings representing the player information.
         """
+        player_info_list = []
         if forward:
             current = self.head
             while current:
-                print(f"Player ID: {current.player.uid}, Name: {current.player.name}")
+                player_info_list.append(f"Player ID: {current.player.uid}, Name: {current.player.name}")
                 current = current.next
         else:
             current = self.tail
             while current:
-                print(f"Player ID: {current.player.uid}, Name: {current.player.name}")
+                player_info_list.append(f"Player ID: {current.player.uid}, Name: {current.player.name}")
                 current = current.previous
+        return player_info_list
