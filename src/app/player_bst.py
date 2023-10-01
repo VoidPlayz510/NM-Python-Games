@@ -24,8 +24,6 @@ class PlayerBST:
         elif player.name > node.key:
             node.right = self._insert_recursive(node.right, player)
         else:
-            # Node with the same key already exists, handle accordingly
-            # You can choose to update the value or handle it in a way that suits your application
             pass
 
         return node
