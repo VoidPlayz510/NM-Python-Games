@@ -135,5 +135,22 @@ class TestPlayerValues(unittest.TestCase):
             right_child = bst.root.right
             self.assertEqual(right_child.key, "Bob")
 
+    def test_search_get_player_name(self):
+        bst = PlayerBST()
+
+        player1 = Player(1, "Alice")
+        player2 = Player(2, "Bob")
+        player3 = Player(3, "Charlie")
+
+        bst.insert(player1)
+        bst.insert(player2)
+        bst.insert(player3)
+
+        searched_player = bst.search("Bob")
+
+        self.assertIsNotNone(searched_player)
+        self.assertEqual(searched_player.key, "Bob")
+
+
 if __name__ == '__main__':
     unittest.main()
