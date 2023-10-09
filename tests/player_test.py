@@ -66,6 +66,9 @@ class TestPlayerValues(unittest.TestCase):
         self.assertTrue(player1 != player2)
 
     def test_sort_score(self):
+        """
+        Test that the score values are being correctly sorted
+        """
         Player.clear_list()
 
         player1 = Player(1, "Alice")
@@ -89,6 +92,9 @@ class TestPlayerValues(unittest.TestCase):
         self.assertEqual(player_list, test_list, 'The list is not the same')
 
     def test_insert_empty_tree(self):
+        """
+        Test sucessfully inserting into an empty BST
+        """
         bst = PlayerBST()
 
         self.assertTrue(bst.is_empty())
@@ -100,6 +106,9 @@ class TestPlayerValues(unittest.TestCase):
         self.assertEqual(bst.root.key, "Alice")
 
     def test_insert_into_non_empty_tree_and_check_left_child(self):
+        """
+        Check if the BST is empty and check the left node to see if it's correctly placed
+        """
         bst = PlayerBST()
 
         player1 = Player(1, "Alice")
@@ -118,6 +127,9 @@ class TestPlayerValues(unittest.TestCase):
             self.assertEqual(left_child.key, "Alice")
 
     def test_insert_into_non_empty_tree_and_check_right_child(self):
+        """
+        Check if the BST is empty and check the right node to see if it's correctly placed
+        """
         bst = PlayerBST()
 
         player1 = Player(1, "Alice")
@@ -136,6 +148,9 @@ class TestPlayerValues(unittest.TestCase):
             self.assertEqual(right_child.key, "Bob")
 
     def test_search_get_player_name(self):
+        """
+        Test the ability to get a player in the BST from its name
+        """
         bst = PlayerBST()
 
         player1 = Player(1, "Alice")
@@ -150,6 +165,24 @@ class TestPlayerValues(unittest.TestCase):
 
         self.assertIsNotNone(searched_player)
         self.assertEqual(searched_player.key, "Bob")
+
+    def test_unsorted_bst_to_balanced_bst(self):
+        """
+        Test creating an unsorted BST and reorder it to a balanced BST
+        """
+        bst = PlayerBST()
+
+        player1 = Player(1, "Alice")
+        player2 = Player(2, "Bob")
+        player3 = Player(3, "Charlie")
+
+        bst.insert(player1)
+        bst.insert(player2)
+        bst.insert(player3)
+
+        bst.create_balanced_bst()
+
+        self.assertTrue(bst.is_balanced())
 
 
 if __name__ == '__main__':
