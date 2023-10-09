@@ -6,7 +6,7 @@ from app.player_bst import PlayerBST
 
 class TestPlayerValues(unittest.TestCase):
     """
-    Unit tests for the Player class.
+    Unit tests for the Player class/BST Classes.
     """
 
     def test_player_name_matches_expected(self):
